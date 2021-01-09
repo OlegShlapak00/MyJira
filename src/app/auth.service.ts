@@ -25,4 +25,7 @@ export class AuthService {
     this.firebaseAuth.signOut();
     localStorage.removeItem('user');
   }
+  getUserEmail(): string{
+    return JSON.parse( localStorage.getItem('user')).email;
+  }
 }

@@ -1,2 +1,15 @@
-<h1>Login in </h1>
-<button (click)="logOut()" >log out</button>
+<section class="home__wrapper">
+  <nav class="navigation">
+    <div class="nav__logo">
+      <img src="https://assets.laliga.com/assets/logos/laliga-h/laliga-h-600x600.png" height="75px" alt="">
+    </div>
+    <div class="nav__log-out-section">
+      <div *ngFor="let user of users | async">
+        <p class="log-out-section__user">{{user.userName}} {{user.userSurname}}</p>
+      </div>
+      <button mat-raised-button class="navigation__button log-out__button" (click)="logOut()">log out</button>
+    </div>
+  </nav>
+  <app-project-backlog></app-project-backlog>
+</section>
+

@@ -1,0 +1,17 @@
+<form class ="add-new-task-form form">
+  <h1 class="form-name">Creating new Task</h1>
+  <mat-form-field class="full-width">
+    <mat-label>Task Name</mat-label>
+    <input type="email" matInput [(ngModel)]="this.taskName" name="name">
+  </mat-form-field>
+  <br>
+  <mat-form-field class="full-width">
+    <mat-label>Task Description</mat-label>
+    <input type="email" matInput [(ngModel)]="this.taskDescription" name="description" >
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <mat-label>Task assignee</mat-label>
+    <input type="email" matInput [(ngModel)]="this.assignee" name="assignee" >
+  </mat-form-field>
+  <button mat-raised-button [mat-dialog-close]="true" (click)="addTask()">Add Task</button>
+</form>
