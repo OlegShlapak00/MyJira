@@ -10,13 +10,16 @@ import {FormsModule} from '@angular/forms';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { AppRoutingModule } from './app-routing.module';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatSelectModule} from '@angular/material/select';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {FirebaseServiceService} from './firebase-service.service';
 import { ProjectBacklogComponent } from './project-backlog/project-backlog.component';
 import { AddTaskComponent } from './add-task/add-task.component';
+import { TaskComponent } from './task/task.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +27,7 @@ import { AddTaskComponent } from './add-task/add-task.component';
     LoginPageComponent,
     ProjectBacklogComponent,
     AddTaskComponent,
+    TaskComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +48,9 @@ import { AddTaskComponent } from './add-task/add-task.component';
     MatInputModule,
     MatButtonModule,
     MatDialogModule,
-    DragDropModule
+    DragDropModule,
+    MatSelectModule,
+    MatButtonToggleModule
   ],
   providers: [AuthService, FirebaseServiceService],
   bootstrap: [AppComponent]

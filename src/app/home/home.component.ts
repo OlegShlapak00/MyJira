@@ -13,19 +13,30 @@ import {CommonModule} from '@angular/common';
 })
 export class HomeComponent implements OnInit {
   @NgModule({
-    imports: [ CommonModule ]
+    imports: [CommonModule]
   })
-  @Output() isLogout = new EventEmitter< void >();
-  constructor(public firebaseService: AuthService, private afs: AngularFirestore) { }
+  @Output() isLogout = new EventEmitter<void>();
+
+  constructor(public firebaseService: AuthService, private afs: AngularFirestore) {
+  }
+
   usersCollection: AngularFirestoreCollection<IUser>;
   users: Observable<IUser[]>;
+  userNS: IUser;
+
   ngOnInit(): void {
     this.usersCollection = this.afs.collection('users', ref => {
       return ref.where('userEmail', '==', this.firebaseService.getUserEmail()).limit(1);
     });
     this.users = this.usersCollection.valueChanges();
+    this.users.subscribe(user => {
+        this.userNS = user[0];
+      }
+    );
+
   }
-  logOut(): void{
+
+  logOut(): void {
     this.firebaseService.logout();
     this.isLogout.emit();
   }
