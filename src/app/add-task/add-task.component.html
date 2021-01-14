@@ -7,11 +7,21 @@
   <br>
   <mat-form-field class="full-width">
     <mat-label>Task Description</mat-label>
-    <textarea type="text" matInput [(ngModel)]="this.taskDescription" name="description" ></textarea>
+    <textarea type="text" class="task-description" matInput [(ngModel)]="this.taskDescription" name="description" ></textarea>
   </mat-form-field>
   <mat-form-field class="full-width">
     <mat-label>Task assignee</mat-label>
-    <input type="text" matInput [(ngModel)]="this.assignee" name="assignee" >
+    <input type="text"
+           placeholder="Pick one"
+           aria-label="Number"
+           matInput
+           [formControl]="assignee"
+           [matAutocomplete]="auto">
+    <mat-autocomplete  #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
   </mat-form-field>
   <button mat-raised-button [mat-dialog-close]="true" (click)="addTask()">Add Task</button>
 </form>

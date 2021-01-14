@@ -4,3 +4,6 @@
   justify-content: center;
 
 }
+.task-description {
+  min-height: 100px;
+}

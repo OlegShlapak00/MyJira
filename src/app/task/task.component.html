@@ -5,13 +5,23 @@
     <input type="text" matInput [(ngModel)]="data.name" name="name">
   </mat-form-field>
   <br>
-  <mat-form-field class="full-width">
+  <mat-form-field class="full-width ">
     <mat-label>Task Description</mat-label>
-    <textarea type="text" matInput [(ngModel)]="data.description" name="description" ></textarea>
+    <textarea type="text" class="task-description" matInput [(ngModel)]="data.description" name="description" ></textarea>
   </mat-form-field>
   <mat-form-field class="full-width">
     <mat-label>Task assignee</mat-label>
-    <input type="text" matInput [(ngModel)]="data.assignee" name="assignee" >
+    <input type="text"
+           [placeholder]="data.assignee"
+           aria-label="Number"
+           matInput
+           [formControl]="assignee"
+           [matAutocomplete]="auto">
+    <mat-autocomplete  #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions | async"  [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Select an option</mat-label>

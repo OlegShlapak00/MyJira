@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {AuthService} from '../auth.service';
 import {FirebaseServiceService} from '../firebase-service.service';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-login-page',
@@ -9,6 +10,7 @@ import {FirebaseServiceService} from '../firebase-service.service';
 })
 export class LoginPageComponent implements OnInit {
   @Output() Sign = new EventEmitter<boolean>();
+  myForm: FormGroup;
   isSignIn = false;
   emailSignUp = '';
   passwordSignUp = '';
@@ -16,12 +18,28 @@ export class LoginPageComponent implements OnInit {
   password = '';
   userName = '';
   userSurname = '';
-  constructor(public firebaseService: AuthService, public firebase: FirebaseServiceService) { }
+  constructor(public firebaseService: AuthService, public firebase: FirebaseServiceService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
-  }
+    this.myForm = this.fb.group({
+      formEmail: (['', Validators.email]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
+      name: new FormControl('', Validators.required),
+      surname: new FormControl('', Validators.required)
+    });
 
+  }
+  isValid(): boolean {
+    return this.myForm.status !== 'VALID';
+  }
   async onSignUp(): Promise<void> {
+    this.emailSignUp = this.myForm.controls.formEmail.value;
+    this.passwordSignUp = this.myForm.controls.password.value;
+    this.userName = this.myForm.controls.name.value;
+    this.userSurname = this.myForm.controls.surname.value;
     await this.firebaseService.signUp(this.emailSignUp, this.passwordSignUp);
     const user = {
       userName: this.userName,

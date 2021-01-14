@@ -1,5 +1,10 @@
-.task-form{
+.task-form {
+  min-width: 300px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
+.task-description {
+  min-height: 100px;
+}
+

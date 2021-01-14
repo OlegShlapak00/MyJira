@@ -18,13 +18,13 @@ import {IUser} from '../../Models/User';
 export class ProjectBacklogComponent implements OnInit {
   taskCollection: AngularFirestoreCollection<ITask>;
   tasks: Observable<ITask[]>;
+  userCollection: AngularFirestoreCollection<IUser>;
+  users: Observable<IUser[]>;
+  options = [];
   @Input() user: IUser;
   todo = [];
   done = [];
   progress = [];
-  myTodo = [];
-  myProgress = [];
-  myDone = [];
 
   constructor(public dialog: MatDialog, private afs: AngularFirestore) {
   }
@@ -32,7 +32,6 @@ export class ProjectBacklogComponent implements OnInit {
   openDialog(): void {
     this.dialog.open(AddTaskComponent);
   }
-
   openTask(data): void {
     this.dialog.open(TaskComponent,
       {
