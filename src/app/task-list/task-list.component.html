@@ -1,0 +1,11 @@
+<div
+  cdkDropList
+  [id]='listName'
+  [cdkDropListData]="listData"
+  [cdkDropListConnectedTo]="connectedLists"
+  class="task-list"
+  (cdkDropListDropped)="drop($event)">
+  <div class="drag-box" (click)="openTask(item)" *ngFor="let item of listData " cdkDrag>
+    <p>{{item.taskName}}</p>
+  </div>
+</div>

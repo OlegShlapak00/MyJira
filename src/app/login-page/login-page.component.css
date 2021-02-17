@@ -1,15 +1,3 @@
-.sign-in-form, .sign-up-form{
-  padding: 20px;
-  width: 25%;
-  border: 2px solid lightgray;
-  border-radius: 5%;
-}
-.form-name{
-  align-self: center;
-}
-.full-width{
-  width: 100%;
-}
 .wrapper{
   height: 100vh;
   background-color: gray;

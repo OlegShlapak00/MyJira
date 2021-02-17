@@ -1,0 +1,17 @@
+.button-group {
+  display: flex;
+  line-height: 0;
+  height: 35px;
+  align-items: center;
+  border: none;
+}
+.add-task-button {
+  margin-right: 20px;
+}
+.action-menu{
+  background: #303030;
+  display: flex;
+  padding: 5px 20px;
+  border-top: lightgray 1px solid;
+  border-bottom: lightgray 1px solid;
+}

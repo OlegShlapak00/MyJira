@@ -45,7 +45,6 @@ export class TaskComponent implements OnInit {
     if (this.assignee.value !== null) {
       this.data.assignee = this.assignee.value;
     }
-    console.log(this.data.assignee);
     this.afs.doc(`Tasks/${this.data.id}`)
       .update({
         taskAssignee: this.data.assignee,

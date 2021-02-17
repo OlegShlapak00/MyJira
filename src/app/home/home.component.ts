@@ -1,10 +1,9 @@
 import {Component, EventEmitter, OnInit, Output, NgModule} from '@angular/core';
 import {AuthService} from '../auth.service';
 import {IUser} from '../../Models/User';
-import {AngularFirestoreCollection} from '@angular/fire/firestore';
-import {Observable} from 'rxjs';
-import {AngularFirestore} from '@angular/fire/firestore';
+
 import {CommonModule} from '@angular/common';
+import {FirebaseServiceService} from '../firebase-service.service';
 
 @Component({
   selector: 'app-home',
@@ -17,23 +16,16 @@ export class HomeComponent implements OnInit {
   })
   @Output() isLogout = new EventEmitter<void>();
 
-  constructor(public firebaseService: AuthService, private afs: AngularFirestore) {
+  constructor(public firebaseService: AuthService, public userService: FirebaseServiceService) {
   }
-
-  usersCollection: AngularFirestoreCollection<IUser>;
-  users: Observable<IUser[]>;
-  userNS: IUser;
+  userNS: IUser = {userEmail: '', userName: '', userSurname: ''};
 
   ngOnInit(): void {
-    this.usersCollection = this.afs.collection('users', ref => {
-      return ref.where('userEmail', '==', this.firebaseService.getUserEmail()).limit(1);
-    });
-    this.users = this.usersCollection.valueChanges();
-    this.users.subscribe(user => {
+    this.userService.getCurrUser().subscribe(
+      user => {
         this.userNS = user[0];
       }
     );
-
   }
 
   logOut(): void {

@@ -1,0 +1,7 @@
+<div class="action-menu">
+  <button mat-raised-button class="button add-task-button" (click)="addNewTask()">Add Task</button>
+  <mat-button-toggle-group #group="matButtonToggleGroup" class="button-group" name="filters" aria-label="Font Style">
+    <mat-button-toggle (click)="myTask()" class="button" value="ME">My tasks</mat-button-toggle>
+    <mat-button-toggle (click)="allTask()" class="button" value="All">All tasks</mat-button-toggle>
+  </mat-button-toggle-group>
+</div>

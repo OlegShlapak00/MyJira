@@ -1,61 +1,8 @@
 <section class="wrapper">
+  <app-sign-up-form (SignUp)="onSignUp($event)"></app-sign-up-form>
 
-<form id="form" [formGroup]="myForm" class="sign-up-form form">
-  <h1 class="form-name">Sign Up</h1>
-  <mat-form-field class="full-width">
-    <mat-label>Email</mat-label>
-    <input id="email"
-           type="email"
-           matInput
-           formControlName="formEmail"
-           name="email"
-           placeholder="Ex. pat@example.com">
-    <mat-error *ngIf="(myForm.controls.formEmail.errors)">must be Email</mat-error>
-  </mat-form-field>
-  <br>
-  <mat-form-field class="full-width">
-  <mat-label>Password</mat-label>
-  <input type="text"
-         matInput
-         name="password"
-         formControlName="password"
-         placeholder=" Ex. 111222">
-    <mat-error *ngIf="(myForm.controls.password.errors)">min length 6 symbols</mat-error>
-  </mat-form-field>
-  <br>
-  <mat-form-field class="full-width">
-    <mat-label>Name</mat-label>
-    <input type="text"
-           matInput
-           formControlName="name"
-           name="userName">
-    <mat-error *ngIf="(myForm.controls.name.errors)">required field</mat-error>
-  </mat-form-field>
-  <br>
-  <mat-form-field class="full-width">
-    <mat-label>Surname</mat-label>
-    <input type="email"
-           matInput
-           formControlName="surname"
-           name="userSurname">
-    <mat-error *ngIf="(myForm.controls.surname.errors)">required field</mat-error>
-  </mat-form-field>
-  <br>
-  <button mat-raised-button (click)="onSignUp()" [disabled]="isValid()">Sign Up</button>
-</form>
+  <app-sign-in-form (SignIn)="onSignIn($event)" ></app-sign-in-form>
 
-<form class ="sign-in-form form">
-  <h1 class="form-name">Sign In</h1>
-  <mat-form-field class="full-width">
-    <mat-label>Email</mat-label>
-    <input type="email" matInput [(ngModel)]="this.email" name="email" placeholder="Ex. pat@example.com">
-  </mat-form-field>
-  <br>
-  <mat-form-field class="full-width">
-    <mat-label>Password</mat-label>
-    <input type="email" matInput [(ngModel)]="this.password" name="password" placeholder=" Ex. 111222">
-  </mat-form-field>
-  <button mat-raised-button (click)="onSignIn()">Sign In</button>
-</form>
+
 
 </section>

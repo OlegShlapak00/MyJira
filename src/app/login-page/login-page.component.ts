@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {AuthService} from '../auth.service';
 import {FirebaseServiceService} from '../firebase-service.service';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {ISignUpForm} from '../../Models/SignUpForm';
 
 @Component({
   selector: 'app-login-page',
@@ -10,49 +10,22 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class LoginPageComponent implements OnInit {
   @Output() Sign = new EventEmitter<boolean>();
-  myForm: FormGroup;
+  signUpForm: ISignUpForm;
   isSignIn = false;
-  emailSignUp = '';
-  passwordSignUp = '';
-  email = '';
-  password = '';
-  userName = '';
-  userSurname = '';
-  constructor(public firebaseService: AuthService, public firebase: FirebaseServiceService, private fb: FormBuilder) { }
+  constructor(public firebaseService: AuthService, public firebase: FirebaseServiceService) { }
 
   ngOnInit(): void {
-    this.myForm = this.fb.group({
-      formEmail: (['', Validators.email]),
-      password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(6),
-      ]),
-      name: new FormControl('', Validators.required),
-      surname: new FormControl('', Validators.required)
-    });
+  }
+  async onSignUp(data: ISignUpForm): Promise<void> {
+    this.signUpForm = data;
+    await this.firebaseService.signUp(this.signUpForm.email, this.signUpForm.password);
 
-  }
-  isValid(): boolean {
-    return this.myForm.status !== 'VALID';
-  }
-  async onSignUp(): Promise<void> {
-    this.emailSignUp = this.myForm.controls.formEmail.value;
-    this.passwordSignUp = this.myForm.controls.password.value;
-    this.userName = this.myForm.controls.name.value;
-    this.userSurname = this.myForm.controls.surname.value;
-    await this.firebaseService.signUp(this.emailSignUp, this.passwordSignUp);
     const user = {
-      userName: this.userName,
-      userSurname: this.userSurname,
-      userEmail: this.emailSignUp
+      userName: this.signUpForm.name,
+      userSurname: this.signUpForm.surname,
+      userEmail: this.signUpForm.email
     };
     await this.firebase.addNewUser(user)
-      .then(() => {
-        this.emailSignUp = '';
-        this.passwordSignUp = '';
-        this.password = '';
-        this.email = '';
-      })
       .catch(err => {
         console.log(err);
       });
@@ -63,14 +36,11 @@ export class LoginPageComponent implements OnInit {
     }
   }
 
-  async onSignIn(): Promise<void> {
-    await this.firebaseService.signIn(this.email, this.password);
+  async onSignIn(data): Promise<void> {
+    console.log(data);
+    await this.firebaseService.signIn(data.email, data.password);
     if (this.firebaseService.isLoggedIn) {
       this.isSignIn = true;
-      this.emailSignUp = '';
-      this.passwordSignUp = '';
-      this.password = '';
-      this.email = '';
       this.Sign.emit(true);
     }
   }

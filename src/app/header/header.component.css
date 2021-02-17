@@ -1,0 +1,20 @@
+.nav__logo{
+  padding-left: 20px;
+}
+.log-out-section__user{
+  padding-right: 10px;
+  align-self: center;
+  margin: 0;
+}
+.nav__log-out-section{
+  display: flex;
+  padding: 0 20px;
+  align-items: center;
+}
+.navigation {
+  background-color: #e91e63;
+  height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
