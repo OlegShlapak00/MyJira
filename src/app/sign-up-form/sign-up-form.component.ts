@@ -5,7 +5,7 @@ import {ISignUpForm} from '../../Models/SignUpForm';
 @Component({
   selector: 'app-sign-up-form',
   templateUrl: './sign-up-form.component.html',
-  styleUrls: ['./sign-up-form.component.css']
+  styleUrls: ['./sign-up-form.component.css', '../login-page/login-page.component.css']
 })
 export class SignUpFormComponent implements OnInit {
 

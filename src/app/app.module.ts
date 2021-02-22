@@ -27,6 +27,7 @@ import { HeaderComponent } from './header/header.component';
 import { ActionMenuComponent } from './action-menu/action-menu.component';
 import { FilterListPipe } from './filter-list.pipe';
 import { TaskListComponent } from './task-list/task-list.component';
+import { GoogleBtnComponent } from './google-btn/google-btn.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +42,7 @@ import { TaskListComponent } from './task-list/task-list.component';
     ActionMenuComponent,
     FilterListPipe,
     TaskListComponent,
+    GoogleBtnComponent,
   ],
     imports: [
         BrowserModule,

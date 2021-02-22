@@ -1,7 +1,22 @@
 <section class="wrapper">
-  <app-sign-up-form (SignUp)="onSignUp($event)"></app-sign-up-form>
+  <div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+      <h2 [className]="isLoginInForm ? 'active': 'inactive underlineHover'" (click)="isLoginInForm = true"> Sign In </h2>
+      <h2 [className]="!isLoginInForm ? 'active': 'inactive underlineHover'" (click)="isLoginInForm = false">Sign Up </h2>
+      <div *ngIf="isLoginInForm">
+        <app-sign-in-form (SignIn)="onSignIn($event)" ></app-sign-in-form>
+      </div>
+      <div *ngIf="!isLoginInForm">
+        <app-sign-up-form (SignUp)="onSignUp($event)"></app-sign-up-form>
+      </div>
+      <hr class="break-line" >
+<!--      <button (click)="Google()">Google</button>-->
+      <app-google-btn (clicked)="Google()"></app-google-btn>
+    </div>
+  </div>
 
-  <app-sign-in-form (SignIn)="onSignIn($event)" ></app-sign-in-form>
+
 
 
 

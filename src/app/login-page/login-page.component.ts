@@ -10,6 +10,7 @@ import {ISignUpForm} from '../../Models/SignUpForm';
 })
 export class LoginPageComponent implements OnInit {
   @Output() Sign = new EventEmitter<boolean>();
+  isLoginInForm = true;
   signUpForm: ISignUpForm;
   isSignIn = false;
   constructor(public firebaseService: AuthService, public firebase: FirebaseServiceService) { }
@@ -39,6 +40,13 @@ export class LoginPageComponent implements OnInit {
   async onSignIn(data): Promise<void> {
     console.log(data);
     await this.firebaseService.signIn(data.email, data.password);
+    if (this.firebaseService.isLoggedIn) {
+      this.isSignIn = true;
+      this.Sign.emit(true);
+    }
+  }
+  async Google(): Promise<void> {
+    await this.firebaseService.signWithGoogle();
     if (this.firebaseService.isLoggedIn) {
       this.isSignIn = true;
       this.Sign.emit(true);
