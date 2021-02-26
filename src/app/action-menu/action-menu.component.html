@@ -4,4 +4,14 @@
     <mat-button-toggle (click)="myTask()" class="button" value="ME">My tasks</mat-button-toggle>
     <mat-button-toggle (click)="allTask()" class="button" value="All">All tasks</mat-button-toggle>
   </mat-button-toggle-group>
+
+  <mat-form-field appearance="fill" class="project">
+    <mat-label>Select the project</mat-label>
+    <mat-select required [(value)]="currentProj" (selectionChange)="changeProj()">
+      <mat-option value="Default">Default</mat-option>
+      <mat-option *ngFor="let project of projects" [value]="project">
+        {{project}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>

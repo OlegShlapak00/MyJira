@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import {ITask} from '../../Models/Task';
 import {Observable} from 'rxjs';
 import {FormControl} from '@angular/forms';
 import {startWith, map} from 'rxjs/operators';
 import {IUser} from '../../Models/User';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-task',
@@ -23,7 +24,10 @@ export class AddTaskComponent implements OnInit {
   taskName: string;
   taskDescription: string;
 
-  constructor(private afs: AngularFirestore) {
+  constructor(
+    private afs: AngularFirestore,
+    @Inject(MAT_DIALOG_DATA) public data
+  ) {
   }
 
   ngOnInit(): void {
@@ -48,6 +52,7 @@ export class AddTaskComponent implements OnInit {
   }
   addTask(): void {
     const newTask: ITask = {
+      taskProject: this.data.project,
       taskName: this.taskName,
       taskDescription: this.taskDescription,
       taskAssignee: this.assignee.value,

@@ -17,6 +17,8 @@ export class ProjectBacklogComponent implements OnInit {
   @Input() user: IUser;
   TaskList;
   UserList;
+  currProject = 'Default';
+  projects = ['MyProject', 'Second Project', 'Another Proj'];
   constructor(
     public dialog: MatDialog,
     public taskService: TasksSrviceService,
@@ -25,7 +27,12 @@ export class ProjectBacklogComponent implements OnInit {
   }
 
   openDialog(): void {
-    this.dialog.open(AddTaskComponent);
+    this.dialog.open(AddTaskComponent,
+      {
+        data: {
+          project: this.currProject
+        }
+      });
   }
   openTask(data): void {
     this.dialog.open(TaskComponent,
@@ -41,7 +48,7 @@ export class ProjectBacklogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.taskService.getTasks().subscribe(tasks => {
+    this.taskService.getTasks(this.currProject).subscribe(tasks => {
       this.TaskList = tasks;
     });
   }
@@ -53,7 +60,13 @@ export class ProjectBacklogComponent implements OnInit {
       .filter(task => task.taskAssignee === `${this.user.userName} ${this.user.userSurname}`);
   }
   allTask(): void {
-    this.taskService.getTasks().subscribe(tasks => {
+    this.taskService.getTasks(this.currProject).subscribe(tasks => {
+      this.TaskList = tasks;
+    });
+  }
+  updateCurrentProject(project): void{
+    this.currProject = project;
+    this.taskService.getTasks(this.currProject).subscribe(tasks => {
       this.TaskList = tasks;
     });
   }

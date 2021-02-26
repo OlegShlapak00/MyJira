@@ -3,7 +3,11 @@
 <app-action-menu
   (addTask)="openDialog()"
   (all)="allTask()"
-  (my)="myTask()">
+  (my)="myTask()"
+  (project)="updateCurrentProject($event)"
+  [projects]="projects"
+>
+
 </app-action-menu>
 <section class="body-wrapper">
   <div class="backlog-tasks">

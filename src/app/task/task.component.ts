@@ -45,13 +45,18 @@ export class TaskComponent implements OnInit {
     if (this.assignee.value !== null) {
       this.data.assignee = this.assignee.value;
     }
-    this.afs.doc(`Tasks/${this.data.id}`)
-      .update({
-        taskAssignee: this.data.assignee,
-        taskDescription: this.data.description,
-        taskName: this.data.name,
-        taskStan: this.data.stan
-      });
+    if (this.data.stan === 'Delete'){
+      this.afs.doc(`Tasks/${this.data.id}`).delete();
+    }
+    else {
+      this.afs.doc(`Tasks/${this.data.id}`)
+        .update({
+          taskAssignee: this.data.assignee,
+          taskDescription: this.data.description,
+          taskName: this.data.name,
+          taskStan: this.data.stan
+        });
+    }
   }
 
 }

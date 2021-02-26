@@ -18,7 +18,6 @@ export class AuthService {
   async signIn(email: string, password: string): Promise<void> {
     await this.firebaseAuth.signInWithEmailAndPassword(email, password)
       .then(res => {
-        console.log(res);
         this.isLoggedIn = true;
         localStorage.setItem('user', JSON.stringify(res.user));
       });

@@ -1,4 +1,4 @@
-import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
 
 @Component({
   selector: 'app-action-menu',
@@ -6,9 +6,13 @@ import {Component, OnInit, Output, EventEmitter} from '@angular/core';
   styleUrls: ['./action-menu.component.css']
 })
 export class ActionMenuComponent implements OnInit {
+  @Input() projects: string[];
   @Output() my = new EventEmitter();
   @Output() all = new EventEmitter();
   @Output() addTask = new EventEmitter();
+  @Output() project = new EventEmitter();
+
+  currentProj = 'Default';
   constructor() { }
 
   ngOnInit(): void {
@@ -21,5 +25,8 @@ export class ActionMenuComponent implements OnInit {
   }
   allTask(): void {
     this.all.emit();
+  }
+  changeProj(): void {
+    this.project.emit(this.currentProj);
   }
 }

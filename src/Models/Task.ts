@@ -4,4 +4,5 @@ export interface ITask {
   taskDescription: string;
   taskAssignee: string;
   taskStan: string;
+  taskProject: string;
 }

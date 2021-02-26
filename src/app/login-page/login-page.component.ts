@@ -38,7 +38,6 @@ export class LoginPageComponent implements OnInit {
   }
 
   async onSignIn(data): Promise<void> {
-    console.log(data);
     await this.firebaseService.signIn(data.email, data.password);
     if (this.firebaseService.isLoggedIn) {
       this.isSignIn = true;
